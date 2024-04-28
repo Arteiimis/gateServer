@@ -1,23 +1,15 @@
 add_rules("mode.debug", "mode.release")
 
-add_requires("jsoncpp",{
-    configs = {
-        runtimes="MD",
-    }
-})
-
-add_requires("boost",{
-    configs = {
-        runtimes = "MD",
-    }
-})
+set_runtimes("MD")
+add_requires("jsoncpp", "boost", "fmt", "spdlog")
 
 target("qt_chat_fullstack")
     set_kind("binary")
     set_languages("cxx20")
-    set_runtimes("MD")
-    add_files("src/*.cpp")
-    add_packages("boost", "jsoncpp")
+    add_includedirs("src")
+    add_includedirs("utils")
+    add_files("src/*.cc")
+    add_packages("boost", "jsoncpp", "fmt", "spdlog")
     set_toolchains("clang-cl")
 target_end()
 

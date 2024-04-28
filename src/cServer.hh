@@ -2,14 +2,12 @@
 #define CSERVER_H
 
 #include "boost/asio/io_context.hpp"
+#include "const.hh"
+
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
 #include <boost/beast/http.hpp>
 
-namespace beast = boost::beast;
-namespace http  = beast::http;
-namespace net   = boost::asio;
-using tcp       = boost::asio::ip::tcp;
 
 class cServer: public std::enable_shared_from_this<cServer>
 {
