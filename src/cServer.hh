@@ -2,10 +2,12 @@
 #define CSERVER_H
 
 #include "boost/asio/io_context.hpp"
-#include "consts.h"
+#include "const.hh"
+
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
 #include <boost/beast/http.hpp>
+
 
 class cServer: public std::enable_shared_from_this<cServer>
 {
