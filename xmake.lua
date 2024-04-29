@@ -3,7 +3,7 @@ add_rules("mode.debug", "mode.release")
 set_runtimes("MD")
 add_requires("jsoncpp", "boost", "fmt", "spdlog")
 
-target("qt_chat_fullstack")
+target("gateServer")
     set_kind("binary")
     set_languages("cxx20")
     add_includedirs("src")
