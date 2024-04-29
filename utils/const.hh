@@ -7,4 +7,6 @@
 namespace beast = boost::beast;
 namespace http  = beast::http;
 namespace net   = boost::asio;
-using tcp       = boost::asio::ip::tcp;
+
+using tcp = boost::asio::ip::tcp;
+using port_t = unsigned short;

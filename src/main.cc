@@ -1,18 +1,29 @@
-#include <iostream>
-#include <json/json.h>
-#include <json/reader.h>
-#include <json/value.h>
+#include "boost/asio/io_context.hpp"
+#include "boost/asio/signal_set.hpp"
+#include "cServer.hh"
+#include "const.hh"
+#include <memory>
 
+int main(int argc, const char** argv) {
+    try {
+        port_t                  port = static_cast<port_t>(8080);
+        net::io_context         ioc{ 1 };
+        boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
 
-int main() {
-    Json::Value root;
-    root["id"]          = 1001;
-    root["data"]        = "hello world";
-    std::string request = root.toStyledString();
-    std::cout << "request is " << request << std::endl;
+        signals.async_wait([&ioc](beast::error_code ec_code, int signal_number) {
+            boost::ignore_unused(signal_number);
+            if ( ec_code ) {
+                spdlog::error("main() signal_set error: {}", ec_code.message());
+                return;
+            }
+            ioc.stop();
+        });
 
-    Json::Value  root2;
-    Json::Reader reader;
-    reader.parse(request, root2);
-    std::cout << "msg id is " << root2["id"] << " msg is " << root2["data"] << std::endl;
+        std::make_shared<cServer>(ioc, port)->startListen();
+        ioc.run();
+    }
+    catch ( const std::exception& exp ) {
+        spdlog::error("main() exception: {}", exp.what());
+    }
+    return 0;
 }

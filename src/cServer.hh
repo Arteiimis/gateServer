@@ -15,7 +15,7 @@ class cServer: public std::enable_shared_from_this<cServer>
 
 public:
     cServer(net::io_context& ioc, port_t port);
-    void start();
+    void startListen();
 
 private:
     tcp::acceptor    _acceptor;  // 用于接受客户端连接的监听器

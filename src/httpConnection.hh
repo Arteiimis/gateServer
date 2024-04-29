@@ -9,8 +9,7 @@ class httpConnection: public std::enable_shared_from_this<httpConnection>
 
 public:
     httpConnection(tcp::socket&& socket);
-
-    auto start() -> void;
+    auto startListen() -> void; 
 
 private:  // private member functions
     auto checkDeadline() -> void;
