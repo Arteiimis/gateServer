@@ -2,6 +2,7 @@
 #define CSERVER_H
 
 #include "boost/asio/io_context.hpp"
+#include "httpConnection.hh"
 #include "const.hh"
 
 #include <boost/asio.hpp>
